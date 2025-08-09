@@ -49,32 +49,31 @@ nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;col
 .hero h1{font-size:clamp(32px,6vw,56px);line-height:1.05;margin:0 0 12px;text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.35)}
 .hero .accent{background:linear-gradient(135deg,var(--rojo),var(--rojo2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-sub{opacity:.97;margin:0 0 16px;max-width:64ch}
-.badges{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
-.badge{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 11px;border-radius:999px;font-size:14px}
+
+/* ===== BOTONES (se siguen usando en otras secciones) ===== */
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;font-weight:900;border:0;cursor:pointer}
 .btn-primary{background:linear-gradient(135deg,var(--rojo),var(--rojo2));color:#fff}
 .btn-outline{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.20);color:#fff}
-.cta-row{display:flex;gap:10px;flex-wrap:wrap}
 
-/* ===== STATS (GLASS) ===== */
+/* ===== STATS (estilo cristal) ===== */
 .stats-card{
-  background:rgba(23,24,28,.50);
-  border:1px solid rgba(255,255,255,.18);
+  background:rgba(17,18,20,.45);
+  border:1px solid rgba(255,255,255,.22);
   border-radius:16px;
   padding:16px;
   backdrop-filter:blur(12px) saturate(120%);
   -webkit-backdrop-filter:blur(12px) saturate(120%);
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  box-shadow:0 8px 30px rgba(0,0,0,.25);
 }
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .stat{
-  background:rgba(10,11,12,.35);
+  background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.14);
   border-radius:14px;
-  padding:14px;
+  padding:12px;
   text-align:center;
 }
-.stat b{display:block;font-size:22px}
+.stat b{display:block;font-size:clamp(18px,5.2vw,22px)}
 
 /* ===== PRODUCTOS ===== */
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
@@ -105,7 +104,7 @@ nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;col
 .rating-badge{display:inline-flex;align-items:center;gap:6px;background:#111214;border:1px solid var(--borde);border-radius:999px;padding:6px 10px;font-weight:800}
 .btn-ghost{display:inline-block;border:1px solid var(--borde);padding:10px 12px;border-radius:12px}
 
-/* ===== SERVICIOS ===== */
+/* ===== SERVICIOS (minimal) ===== */
 .service-list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
 .service-item{
   display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:flex-start;
@@ -143,19 +142,10 @@ footer a{color:#ffdede}
   nav a{display:block}
 
   .hero{background-position:center 50%}
-
-  /* overlay del hero más claro en móvil para que se vea más la foto */
-  .hero::before{
-    background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.22) 40%, rgba(0,0,0,.55));
-  }
-
   .hero .wrap{grid-template-columns:1fr;padding:44px 0}
-
-  /* bajar más la tarjeta para no tapar el rótulo */
-  .stats-card{ margin-top:clamp(64px,22vh,200px); padding:14px }
+  /* Baja la tarjeta para no tapar la foto en móvil */
+  .stats-card{margin-top:clamp(24px,16vh,120px)}
   .grid-2{grid-template-columns:1fr}
-  .stat{ padding:12px }
-  .stat b{ font-size:20px }
 
   .foot{grid-template-columns:1fr}
   .social-grid{grid-template-columns:1fr}
@@ -183,4 +173,5 @@ footer a{color:#ffdede}
   .carousel-dots{ display:none }
   .fade-mask{ -webkit-mask-image:none; mask-image:none }
 }
+
 
