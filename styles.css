@@ -33,7 +33,7 @@ nav ul::-webkit-scrollbar{display:none}
 nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;color:#f2f2f6;border:1px solid transparent}
 .menu-btn{display:none;border:0;padding:10px 14px;border-radius:999px;background:linear-gradient(135deg,var(--rojo),var(--rojo2));color:#fff;font-weight:900;cursor:pointer}
 
-/* ===== HERO (velo más claro) ===== */
+/* ===== HERO ===== */
 .hero{
   color:#fff;display:flex;align-items:center;
   min-height:clamp(560px,84vh,820px);
@@ -42,11 +42,11 @@ nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;col
 }
 .hero::before{
   content:"";position:absolute;inset:0;z-index:0;
-  background:linear-gradient(180deg, rgba(0,0,0,.36), rgba(0,0,0,.18) 40%, rgba(0,0,0,.48));
+  background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.35) 40%, rgba(0,0,0,.65));
 }
 .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center;width:100%}
 .hero-eyebrow{font-weight:900;letter-spacing:.3px;margin-bottom:8px;opacity:.95}
-.hero h1{font-size:clamp(32px,6vw,56px);line-height:1.05;margin:0 0 12px;text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.25)}
+.hero h1{font-size:clamp(32px,6vw,56px);line-height:1.05;margin:0 0 12px;text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.35)}
 .hero .accent{background:linear-gradient(135deg,var(--rojo),var(--rojo2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-sub{opacity:.97;margin:0 0 16px;max-width:64ch}
 .badges{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
@@ -56,10 +56,24 @@ nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;col
 .btn-outline{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.20);color:#fff}
 .cta-row{display:flex;gap:10px;flex-wrap:wrap}
 
-/* ===== STATS ===== */
-.stats-card{background:#17181c99;border:1px solid var(--borde);border-radius:16px;padding:16px;backdrop-filter:blur(8px)}
+/* ===== STATS (GLASS) ===== */
+.stats-card{
+  background:rgba(23,24,28,.50);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:16px;
+  padding:16px;
+  backdrop-filter:blur(12px) saturate(120%);
+  -webkit-backdrop-filter:blur(12px) saturate(120%);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat{background:var(--card);border:1px solid var(--borde);border-radius:14px;padding:14px;text-align:center}
+.stat{
+  background:rgba(10,11,12,.35);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+}
 .stat b{display:block;font-size:22px}
 
 /* ===== PRODUCTOS ===== */
@@ -129,15 +143,19 @@ footer a{color:#ffdede}
   nav a{display:block}
 
   .hero{background-position:center 50%}
-  .hero .wrap{grid-template-columns:1fr;padding:44px 0 24px}
 
-  /* Ocultar badges y CTAs en mobile para que se vea más la foto */
-  .badges, .cta-row{display:none}
+  /* overlay del hero más claro en móvil para que se vea más la foto */
+  .hero::before{
+    background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.22) 40%, rgba(0,0,0,.55));
+  }
 
-  /* Bajar la tarjeta de stats para que NO tape la imagen */
-  .stats-card{margin-top:24vh}
+  .hero .wrap{grid-template-columns:1fr;padding:44px 0}
 
+  /* bajar más la tarjeta para no tapar el rótulo */
+  .stats-card{ margin-top:clamp(64px,22vh,200px); padding:14px }
   .grid-2{grid-template-columns:1fr}
+  .stat{ padding:12px }
+  .stat b{ font-size:20px }
 
   .foot{grid-template-columns:1fr}
   .social-grid{grid-template-columns:1fr}
@@ -165,5 +183,4 @@ footer a{color:#ffdede}
   .carousel-dots{ display:none }
   .fade-mask{ -webkit-mask-image:none; mask-image:none }
 }
-
 
