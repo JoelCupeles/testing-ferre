@@ -36,25 +36,28 @@ nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;col
 /* ===== HERO ===== */
 .hero{
   color:#fff;display:flex;align-items:stretch;
-  min-height:clamp(520px,80vh,760px);
-  background:url('assets/ferreteria-de-noche.jpg') center 52%/cover no-repeat;
+  min-height:clamp(500px,78vh,740px);
+  background:url('assets/ferreteria-de-noche.jpg') center 62%/cover no-repeat; /* sube la imagen (menos cielo) */
   position:relative;isolation:isolate;padding-top:0;
 }
 .hero::before{
   content:"";position:absolute;inset:0;z-index:0;
-  /* oscurece arriba y abajo; centro más limpio para la fachada */
+  /* gradiente más suave arriba para poder usar ese espacio */
   background:
-    radial-gradient(60% 50% at 50% 42%, rgba(0,0,0,.14), transparent 60%),
-    linear-gradient(180deg, rgba(0,0,0,.62), rgba(0,0,0,.30) 38%, rgba(0,0,0,.66));
+    radial-gradient(60% 52% at 50% 40%, rgba(0,0,0,.10), transparent 62%),
+    linear-gradient(180deg, rgba(0,0,0,.50), rgba(0,0,0,.28) 40%, rgba(0,0,0,.66));
 }
 .hero .wrap{
   position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;
-  gap:22px;align-items:end;width:100%;padding:12px 0 calc(8px + env(safe-area-inset-bottom, 0));
+  align-items:start;            /* ancla arriba */
+  align-content:start;          /* grid pegado al top */
+  gap:18px;width:100%;
+  padding:4px 0 10px;           /* casi sin padding arriba */
 }
-.hero-eyebrow{font-weight:900;letter-spacing:.3px;margin-bottom:6px;opacity:.98}
-.hero h1{font-size:clamp(30px,5.3vw,52px);line-height:1.05;margin:0 0 8px;text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.35)}
+.hero-eyebrow{font-weight:900;letter-spacing:.3px;margin:4px 0 6px;opacity:.98}
+.hero h1{font-size:clamp(28px,5vw,50px);line-height:1.05;margin:0 0 8px;text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.35)}
 .hero .accent{background:linear-gradient(135deg,var(--rojo),var(--rojo2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero-sub{opacity:.97;margin:0 0 10px;max-width:50ch}
+.hero-sub{opacity:.97;margin:0 0 8px;max-width:52ch}
 
 /* ===== FACTS (grid, sin overflow) ===== */
 .hero-facts{
@@ -137,12 +140,12 @@ footer a{color:#ffdede}
   nav li{display:block}
   nav a{display:block}
 
-  .hero{background-position:center 56%}
-  .hero .wrap{grid-template-columns:1fr;padding:20px 0 12px}
+  .hero{background-position:center 66%} /* aún menos cielo en móvil */
+  .hero .wrap{grid-template-columns:1fr;padding:2px 0 10px} /* casi pegado al header */
   .hero-sub{max-width:48ch}
 
-  /* facts: 2x2 en móvil, sin scroll lateral */
-  .hero-facts{grid-template-columns:repeat(2, minmax(0,1fr));margin-top:10px}
+  /* facts: 2x2 en móvil */
+  .hero-facts{grid-template-columns:repeat(2, minmax(0,1fr));margin-top:6px}
   .chip b{font-size:15px}
 
   .foot{grid-template-columns:1fr}
@@ -171,3 +174,4 @@ footer a{color:#ffdede}
   .carousel-dots{ display:none }
   .fade-mask{ -webkit-mask-image:none; mask-image:none }
 }
+
