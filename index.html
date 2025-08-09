@@ -57,19 +57,21 @@
 
 <section class="hero">
   <div class="container wrap">
-    <div>
+    <div class="hero-copy">
       <div class="hero-eyebrow"><span id="heroTicker">Llaves al instante</span></div>
       <h1><span class="accent">Servicio personalizado</span> por más de 30 años</h1>
       <p class="hero-sub">Herramientas, materiales, pinturas y asesoría experta. Atención cercana y precios competitivos para el hogar, taller y construcción.</p>
     </div>
 
-    <div class="stats-card">
-      <div class="grid-2">
-        <div class="stat"><b>+3,000</b> productos</div>
-        <div class="stat"><b>7:00 a 4:30</b> horario (Lun–Sáb)</div>
-        <div class="stat"><b>San Germán</b> servicio local</div>
-        <div class="stat"><b>Desde 1989</b> experiencia</div>
-      </div>
+    <!-- NUEVO: barra de datos estilo chips -->
+    <div class="hero-facts">
+      <ul class="facts-row" aria-label="Datos rápidos">
+        <li class="chip"><b>+3,000</b><span>productos</span></li>
+        <li class="chip"><b>7:00–4:30</b><span>Lun–Sáb</span></li>
+        <li class="chip"><b>San Germán</b><span>servicio local</span></li>
+        <li class="chip"><b>Desde</b><span>1989</span></li>
+      </ul>
+      <a class="btn btn-primary hero-cta" href="https://api.whatsapp.com/send?phone=17878923930&text=Hola%20Ferreter%C3%ADa%20El%20Flaco%2C%20necesito%20informaci%C3%B3n" target="_blank" rel="noopener">WhatsApp</a>
     </div>
   </div>
 </section>
@@ -162,7 +164,7 @@
         <div class="service-icon">🪚</div>
         <div class="service-body">
           <h3>Corte de madera</h3>
-          <p>Medidas a la carta para carpintería y construcción. <strong>Servicio sin costo</strong> solo materiales.</p>
+          <p>Medidas a la carta para carpintería y construcción. <strong>Servicio sin costo</strong> (solo materiales).</p>
         </div>
       </li>
 
@@ -170,7 +172,7 @@
         <div class="service-icon">🔑</div>
         <div class="service-body">
           <h3>Duplicado de llaves</h3>
-          <p>Rápido y preciso para hogar y candados <strong>no autos</strong>.</p>
+          <p>Rápido y preciso para hogar y candados <strong>(no autos)</strong>.</p>
         </div>
       </li>
 
@@ -252,4 +254,3 @@
 <script src="script.js" defer></script>
 </body>
 </html>
-
