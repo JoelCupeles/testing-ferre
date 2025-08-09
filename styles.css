@@ -38,47 +38,51 @@ nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;col
   color:#fff;display:flex;align-items:center;
   min-height:clamp(560px,84vh,820px);
   background:url('assets/ferreteria-de-noche.jpg') center 48%/cover no-repeat;
-  position:relative;isolation:isolate;
-  padding-top:0; /* elimina el espacio negro bajo el navbar */
+  position:relative;isolation:isolate;padding-top:0;
 }
 .hero::before{
   content:"";position:absolute;inset:0;z-index:0;
   background:
-    radial-gradient(60% 50% at 50% 35%, rgba(0,0,0,.16), transparent 60%),
+    radial-gradient(60% 50% at 50% 35%, rgba(0,0,0,.18), transparent 60%),
     linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.34) 42%, rgba(0,0,0,.66));
 }
-.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center;width:100%}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:end;width:100%;padding-top:12px}
 .hero-eyebrow{font-weight:900;letter-spacing:.3px;margin-bottom:8px;opacity:.98}
-.hero h1{font-size:clamp(32px,6vw,56px);line-height:1.05;margin:0 0 12px;text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.35)}
+.hero h1{font-size:clamp(30px,5.4vw,54px);line-height:1.05;margin:0 0 10px;text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.35)}
 .hero .accent{background:linear-gradient(135deg,var(--rojo),var(--rojo2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero-sub{opacity:.97;margin:0 0 16px;max-width:60ch}
+.hero-sub{opacity:.97;margin:0 0 14px;max-width:52ch}
 
-/* Botones */
+/* NUEVO: barra de datos */
+.hero-facts{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(16,17,20,.42);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:16px;
+  padding:10px;
+  backdrop-filter:blur(14px) saturate(120%);
+  -webkit-backdrop-filter:blur(14px) saturate(120%);
+  width:100%;
+}
+.facts-row{
+  display:flex;gap:8px;list-style:none;margin:0;padding:0;overflow:auto;scrollbar-width:none;flex:1;
+}
+.facts-row::-webkit-scrollbar{display:none}
+.chip{
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  min-width:140px;padding:10px 12px;border-radius:12px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+  white-space:nowrap;
+}
+.chip b{font-size:15px;line-height:1}
+.chip span{font-size:12px;color:var(--muted);line-height:1.2}
+.hero-cta{white-space:nowrap;border-radius:12px;padding:10px 14px;font-weight:900}
+
+/* BOTONES (reuso) */
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;font-weight:900;border:0;cursor:pointer}
 .btn-primary{background:linear-gradient(135deg,var(--rojo),var(--rojo2));color:#fff}
 .btn-outline{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.20);color:#fff}
 
-/* STATS cristal */
-.stats-card{
-  background:rgba(16,17,20,.36);
-  border:1px solid rgba(255,255,255,.18);
-  border-radius:16px;
-  padding:16px;
-  backdrop-filter:blur(14px) saturate(120%);
-  -webkit-backdrop-filter:blur(14px) saturate(120%);
-  box-shadow:0 8px 30px rgba(0,0,0,.25);
-}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:14px;
-  padding:12px;
-  text-align:center;
-}
-.stat b{display:block;font-size:clamp(18px,5.2vw,22px)}
-
-/* Productos */
+/* PRODUCTOS */
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
 .filters input,.filters select{background:#121317;color:#fff;border:1px solid var(--borde);border-radius:12px;padding:10px}
 .products{display:grid;grid-auto-flow:column;grid-auto-columns:85%;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:10px;margin:0 -8px;padding-left:8px;padding-right:8px;position:relative}
@@ -123,7 +127,7 @@ nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;col
 .service-body p{margin:0;color:var(--muted);font-size:15px}
 .btn-compact{padding:9px 12px;border-radius:10px;margin-top:10px;display:inline-flex}
 
-/* Ubicación y Contacto */
+/* Ubicación / Contacto */
 .map{border:0;width:100%;height:360px;border-radius:14px}
 .social-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .btn-social{display:flex;align-items:center;gap:10px;justify-content:center;border-radius:14px;padding:16px;font-weight:900;border:0;background:var(--card);color:#fff;text-align:center}
@@ -146,12 +150,17 @@ footer a{color:#ffdede}
 
   .hero{background-position:center 52%}
   .hero .wrap{grid-template-columns:1fr;padding:44px 0}
-  /* más bajo para no tapar la foto */
-  .stats-card{margin-top:clamp(32px,18vh,140px)}
-  .grid-2{grid-template-columns:1fr}
-
+  .hero-facts{margin-top:clamp(28px,18vh,140px)}
+  .facts-row{gap:8px}
+  .chip{min-width:136px}
   .foot{grid-template-columns:1fr}
   .social-grid{grid-template-columns:1fr}
+}
+
+/* breakpoint intermedio */
+@media (min-width:981px) and (max-width:1199px){
+  .hero{background-position:center 50%}
+  .hero-facts{margin-top:8vh}
 }
 
 /* Safety */
