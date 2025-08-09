@@ -34,10 +34,11 @@ const productos=[
 ];
 
 const ofertas=[
-  {nombre:'WECO W1000 Thin Set – Oferta especial', categoria:'Ofertas', marca:'WECO', foto:'assets/oferta-weco.jpg'}
+  // Demo con precio para que se vea la etiqueta de precio
+  {nombre:'WECO W1000 Thin Set – Oferta especial', precio:14.99, categoria:'Ofertas', marca:'WECO', foto:'assets/oferta-weco.jpg'}
 ];
 
-// Cargar categorías
+// Select de categorías
 const catSelect=document.getElementById('categoria');
 const categorias=[...new Set(productos.map(p=>p.categoria))].sort();
 categorias.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;catSelect.appendChild(o);});
@@ -48,19 +49,36 @@ const search=document.getElementById('search');
 
 const waIcon = `<svg class="wa" viewBox="0 0 32 32" aria-hidden="true"><path d="M19.3 17.3c-.3-.2-1.6-.8-1.8-.9s-.4-.2-.6.1-.7.9-.9 1.1-.3.2-.6.1c-.3-.2-1.1-.4-2.1-1.3-1-.9-1.3-1.8-1.4-2.1 0-.2 0-.3.1-.4.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2.1-.2-.6-.4-.5-.6-.5h-.5c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.3 3.1 1.4 3.3c.2.2 2.6 4 6.4 5.4.9.4 1.7.6 2.3.8 1 .3 2 .2 2.7.1.8-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3z" fill="currentColor"/></svg>`;
 
-const cardHTML=p=>`
+// Tarjeta de producto (sin precio: CTA "Pedir cotización")
+const productCardHTML=p=>`
   <article class="card">
     <img loading="lazy" src="${p.foto}" alt="${p.nombre}">
     <div class="body">
       <div class="tags"><span class="pill">${p.categoria}</span><span class="pill">${p.marca}</span></div>
       <h3>${p.nombre}</h3>
+      ${p.precio!=null?('<div class="price">$'+p.precio.toFixed(2)+'</div>'):''}
       <a class="btn btn-wa-red btn-full" aria-label="Pedir cotización por WhatsApp para ${p.nombre}"
          href="https://api.whatsapp.com/send?phone=17878923930&text=${encodeURIComponent('Hola, quiero info del producto: '+p.nombre)}"
          target="_blank" rel="noopener">${waIcon}Pedir cotización</a>
     </div>
   </article>`;
 
-function render(list){ grid.innerHTML=list.map(cardHTML).join(''); }
+// Tarjeta de oferta (con posible precio: CTA "Pedir")
+const offerCardHTML=o=>`
+  <article class="card">
+    <img loading="lazy" src="${o.foto}" alt="${o.nombre}">
+    <div class="body">
+      <div class="tags"><span class="pill">${o.categoria}</span><span class="pill">${o.marca}</span></div>
+      <h3>${o.nombre}</h3>
+      ${o.precio!=null?('<div class="price">$'+o.precio.toFixed(2)+'</div>'):''}
+      <a class="btn btn-wa-red btn-full" aria-label="Pedir por WhatsApp ${o.nombre}"
+         href="https://api.whatsapp.com/send?phone=17878923930&text=${encodeURIComponent('Hola, quiero pedir: '+o.nombre)}"
+         target="_blank" rel="noopener">${waIcon}Pedir</a>
+    </div>
+  </article>`;
+
+// Render & filtro
+function render(list){ grid.innerHTML=list.map(productCardHTML).join(''); }
 function filtrar(){
   const q=(search.value||'').toLowerCase().trim();
   const c=catSelect.value;
@@ -76,13 +94,13 @@ catSelect.addEventListener('change',filtrar);
 render(productos);
 
 // Ofertas
-offersGrid.innerHTML=ofertas.map(cardHTML).join('');
+offersGrid.innerHTML=ofertas.map(offerCardHTML).join('');
 
 // Hero ticker
 (function(){
   const el=document.getElementById('heroTicker');
   if(!el) return;
-  const frases=['Asesoría experta','Desde <b>1989</b>','Servicio con cariño boricua','Llaves al instante'];
+  const frases=['Servicio con cariño boricua','Desde <b>1989</b>','Asesoría experta','Llaves al instante'];
   let i=0; setInterval(()=>{ i=(i+1)%frases.length; el.innerHTML=frases[i]; }, 2500);
 })();
 
@@ -151,10 +169,7 @@ offersGrid.innerHTML=ofertas.map(cardHTML).join('');
     }
 
     let raf;
-    function onScroll(){
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(sync);
-    }
+    function onScroll(){ cancelAnimationFrame(raf); raf = requestAnimationFrame(sync); }
 
     const RO = window.ResizeObserver || class{ constructor(cb){ this.cb=cb; window.addEventListener('resize', ()=>cb()); } observe(){} };
     const ro = new RO(renderDots);
@@ -170,3 +185,4 @@ offersGrid.innerHTML=ofertas.map(cardHTML).join('');
     setupDots(scroller, dots);
   });
 })();
+
