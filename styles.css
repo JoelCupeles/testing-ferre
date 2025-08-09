@@ -46,7 +46,7 @@ nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;col
     radial-gradient(60% 52% at 50% 40%, rgba(0,0,0,.10), transparent 62%),
     linear-gradient(180deg, rgba(0,0,0,.50), rgba(0,0,0,.28) 40%, rgba(0,0,0,.70));
 }
-/* Fade suave hacia el fondo de la página */
+/* Fade hacia el fondo de la página */
 .hero::after{
   content:"";position:absolute;left:0;right:0;bottom:-1px;height:110px;z-index:0;
   background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--bg) 88%);
@@ -115,6 +115,54 @@ nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;col
 
 .card .btn{margin-top:10px}
 
+/* ===== REVIEWS (nuevo look) ===== */
+.reviews{
+  display:grid;grid-auto-flow:column;grid-auto-columns:85%;
+  gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+  padding-bottom:10px;margin:0 -8px;padding-left:8px;padding-right:8px;
+}
+.reviews::-webkit-scrollbar{display:none}
+.review-card{
+  scroll-snap-align:start;background:transparent;border-radius:16px;position:relative;
+  padding:1px;  /* borde degradado usando doble fondo */
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.04)) border-box,
+    linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,0)) border-box;
+}
+.review-card::after{
+  content:""; position:absolute; inset:1px; border-radius:15px;
+  background:rgba(22,23,27,.82);
+  backdrop-filter: blur(10px) saturate(120%); -webkit-backdrop-filter: blur(10px) saturate(120%);
+  z-index:0;
+}
+.review-card>*{position:relative;z-index:1}
+.review-card{transition:transform .12s ease, box-shadow .12s ease}
+.review-card:hover{ transform:translateY(-1px); box-shadow:0 10px 24px rgba(0,0,0,.25) }
+
+.review-head{display:flex;align-items:center;gap:12px;padding:14px 14px 0}
+.avatar{
+  width:42px;height:42px;border-radius:50%;
+  display:grid;place-items:center;font-weight:800;background:#202227;color:#fff;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.06);
+}
+.meta strong{display:block;font-size:15px}
+.stars-row{line-height:1}
+.stars{
+  color:#f5c518; letter-spacing:1px;
+  background:linear-gradient(180deg,#ffd979,#f2b400);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.review-text{padding:10px 14px 16px;margin:0;color:#dfe0e6;font-size:14px}
+
+/* desktop grid */
+@media (min-width:900px){
+  .reviews{grid-auto-flow:initial;grid-auto-columns:initial;grid-template-columns:repeat(3,1fr);overflow:visible;scroll-snap-type:none;margin:0;padding:0}
+}
+
+/* Reseñas: badge y botón ghost */
+.rating-badge{display:inline-flex;align-items:center;gap:6px;background:#111214;border:1px solid var(--borde);border-radius:999px;padding:6px 10px;font-weight:800}
+.btn-ghost{display:inline-block;border:1px solid var(--borde);padding:10px 12px;border-radius:12px}
+
 /* Servicios */
 .service-list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
 .service-item{
@@ -151,7 +199,7 @@ footer{background:#000;color:#bdbdc6;padding:22px 0;margin-top:22px;border-top:1
 .foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:18px}
 footer a{color:#ffdede}
 
-/* Mobile */
+/* Mobile extra */
 @media (max-width:980px){
   .menu-btn{display:inline-flex}
   nav ul{display:block;position:fixed;left:12px;right:12px;top:var(--header-h);background:#101214;border:1px solid var(--borde);border-radius:14px;padding:12px;z-index:3300;opacity:0;pointer-events:none;transform:translateY(-6px)}
@@ -161,7 +209,6 @@ footer a{color:#ffdede}
 
   .hero{background-position:center 66%}
   .hero .wrap{grid-template-columns:1fr;padding:4px 0 10px}
-  /* BAJAR MÁS los datos para no tapar la fachada */
   .hero-facts{grid-template-columns:repeat(2, minmax(0,1fr));margin-top:clamp(26px,22vh,180px)}
   .chip b{font-size:15px}
 
@@ -173,7 +220,7 @@ footer a{color:#ffdede}
 .container, nav, .hero, footer { max-width:100vw; overflow-x:clip }
 .fb-page, .fb-page iframe, .fb-page span { max-width:100% !important; width:100% !important }
 
-/* Carrusel UI */
+/* Carrusel dots (compartido) */
 .fade-mask{
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
           mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
