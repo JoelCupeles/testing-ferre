@@ -30,9 +30,8 @@ const productos=[
   {nombre:'Lanco Dry-Coat – Penetrating Surface Cleaner (1 gal)', precio:null, categoria:'Limpieza', marca:'LANCO', foto:'assets/lanco-penetrating-surface-cleaner-dry-coat.jpg'},
   {nombre:'Amsoil Saber 2-Stroke Oil (mezcla)', precio:null, categoria:'Lubricantes', marca:'Amsoil', foto:'assets/2-stroke-oil.jpg'},
   {nombre:'Discos de corte StrongJohn (varios)', precio:null, categoria:'Abrasivos', marca:'StrongJohn', foto:'assets/discos-strongjohn.jpg'},
-
-  // Nuevo producto
-  {nombre:'Fluidmaster Better Than Wax – Universal Toilet Seal', precio:null, categoria:'Plomería', marca:'Fluidmaster', foto:'assets/fluidmaster-better-than-wax.jpg'}
+  // NUEVO producto solicitado
+  {nombre:'Fluidmaster Better Than Wax – Sello Universal para Inodoros', precio:null, categoria:'Plomería', marca:'Fluidmaster', foto:'assets/fluidmaster-better-than-wax.jpg'}
 ];
 
 const ofertas=[
@@ -81,11 +80,11 @@ offersGrid.innerHTML=ofertas.map(cardHTML).join('');
 (function(){
   const el=document.getElementById('heroTicker');
   if(!el) return;
-  const frases=['Desde <b>1989</b>','Llaves al instante','Asesoría experta','Servicio con cariño boricua'];
+  const frases=['Llaves al instante','Desde <b>1989</b>','Asesoría experta','Servicio con cariño boricua'];
   let i=0; setInterval(()=>{ i=(i+1)%frases.length; el.innerHTML=frases[i]; }, 2500);
 })();
 
-// Carrusel con puntos (ventana deslizante)
+// ===== Carrusel: puntos con ventana deslizante (máximo N) =====
 (function(){
   const MAX_DOTS = 5;
 
