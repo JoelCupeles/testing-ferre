@@ -30,6 +30,7 @@ const productos=[
   {nombre:'Lanco Dry-Coat – Penetrating Surface Cleaner (1 gal)', precio:null, categoria:'Limpieza', marca:'LANCO', foto:'assets/lanco-penetrating-surface-cleaner-dry-coat.jpg'},
   {nombre:'Amsoil Saber 2-Stroke Oil (mezcla)', precio:null, categoria:'Lubricantes', marca:'Amsoil', foto:'assets/2-stroke-oil.jpg'},
   {nombre:'Discos de corte StrongJohn (varios)', precio:null, categoria:'Abrasivos', marca:'StrongJohn', foto:'assets/discos-strongjohn.jpg'},
+  // Producto nuevo solicitado
   {nombre:'Fluidmaster Better Than Wax – Sello Universal para Inodoros', precio:null, categoria:'Plomería', marca:'Fluidmaster', foto:'assets/fluidmaster-better-than-wax.jpg'}
 ];
 
@@ -167,5 +168,6 @@ offersGrid.innerHTML=ofertas.map(cardHTML).join('');
     setupDots(scroller, dots);
   });
 })();
+
 
 
