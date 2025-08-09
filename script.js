@@ -23,7 +23,7 @@ Array.from(document.querySelectorAll('nav a')).forEach(a=>a.addEventListener('cl
 const yEl=document.getElementById('y'); if(yEl) yEl.textContent=new Date().getFullYear();
 
 // === DATA ===
-// Catálogo (añadido: Abanicos con panel solar)
+// Catálogo (incluye: Abanicos con panel solar)
 const productos=[
   {nombre:'Taladro DeWalt 20V MAX (driver)', precio:null, categoria:'Herramientas', marca:'DeWalt', foto:'assets/Dewalt-driver.webp?v=1'},
   {nombre:'Gardner 100% Silicón – Flat Roof Coat-N-Seal (4.75 gal)', precio:null, categoria:'Construcción', marca:'Gardner', foto:'assets/gardner-100-silicone.jpg'},
@@ -36,8 +36,9 @@ const productos=[
   {nombre:'Abanicos con panel solar', precio:null, categoria:'Energía', marca:'AM-2501', foto:'assets/abanicos-con-panel-solar.jpg'}
 ];
 
-// Ofertas (reemplazado por la cisterna Fortlev)
+// Ofertas (ahora son dos: WECO + FORTLEV)
 const ofertas=[
+  {nombre:'WECO W1000 Thin Set – Oferta especial', precio:null, categoria:'Ofertas', marca:'WECO', foto:'assets/oferta-weco.jpg'},
   {nombre:'Cisterna Fortlev – 5 años de garantía', precio:159.00, categoria:'Ofertas', marca:'FORTLEV', foto:'assets/fortlev-5anos-de-garantia.jpg'}
 ];
 
@@ -123,6 +124,74 @@ offersGrid.innerHTML=ofertas.map(offerCardHTML).join('');
     const pageW = scrollEl.clientWidth || 1;
     return Math.round(scrollEl.scrollLeft / pageW);
   }
+
+  function scrollToPage(scrollEl, i){
+    const pageW = scrollEl.clientWidth || 1;
+    scrollEl.scrollTo({ left: i * pageW, behavior:'smooth' });
+  }
+
+  function calcWindowStart(curr, total, maxDots){
+    const half = Math.floor(maxDots/2);
+    let start = curr - half;
+    start = Math.max(0, start);
+    start = Math.min(start, Math.max(0, total - maxDots));
+    return start;
+  }
+
+  function setupDots(scrollEl, dotsEl){
+    if(!scrollEl || !dotsEl) return;
+
+    let total = pagesCount(scrollEl);
+
+    function renderDots(){
+      total = pagesCount(scrollEl);
+      dotsEl.innerHTML = '';
+
+      const visible = Math.min(MAX_DOTS, total);
+      for(let i=0;i<visible;i++){
+        const b=document.createElement('button');
+        b.type='button';
+        b.addEventListener('click', ()=>{
+          const target = Number(b.dataset.pageIndex || 0);
+          scrollToPage(scrollEl, target);
+        });
+        dotsEl.appendChild(b);
+      }
+      sync();
+    }
+
+    function sync(){
+      const curr = currentPageIndex(scrollEl);
+      const visible = Math.min(MAX_DOTS, total);
+      const start = total > visible ? calcWindowStart(curr, total, visible) : 0;
+
+      const btns = dotsEl.querySelectorAll('button');
+      btns.forEach((b, i)=>{
+        const pageIndex = start + i;
+        b.dataset.pageIndex = String(pageIndex);
+        b.setAttribute('aria-current', pageIndex===curr ? 'true' : 'false');
+        b.setAttribute('aria-label', `Ir a página ${pageIndex+1} de ${total}`);
+      });
+    }
+
+    let raf;
+    function onScroll(){ cancelAnimationFrame(raf); raf = requestAnimationFrame(sync); }
+
+    const RO = window.ResizeObserver || class{ constructor(cb){ this.cb=cb; window.addEventListener('resize', ()=>cb()); } observe(){} };
+    const ro = new RO(renderDots);
+    ro.observe(scrollEl);
+
+    scrollEl.addEventListener('scroll', onScroll, { passive:true });
+    renderDots();
+  }
+
+  document.querySelectorAll('.carousel-dots').forEach(dots=>{
+    const id = dots.getAttribute('data-for');
+    const scroller = document.getElementById(id);
+    setupDots(scroller, dots);
+  });
+})();
+
 
   function scrollToPage(scrollEl, i){
     const pageW = scrollEl.clientWidth || 1;
