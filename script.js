@@ -22,7 +22,8 @@ Array.from(document.querySelectorAll('nav a')).forEach(a=>a.addEventListener('cl
 // Año en footer
 const yEl=document.getElementById('y'); if(yEl) yEl.textContent=new Date().getFullYear();
 
-// Productos (demo)
+// === DATA ===
+// Catálogo (añadido: Abanicos con panel solar)
 const productos=[
   {nombre:'Taladro DeWalt 20V MAX (driver)', precio:null, categoria:'Herramientas', marca:'DeWalt', foto:'assets/Dewalt-driver.webp?v=1'},
   {nombre:'Gardner 100% Silicón – Flat Roof Coat-N-Seal (4.75 gal)', precio:null, categoria:'Construcción', marca:'Gardner', foto:'assets/gardner-100-silicone.jpg'},
@@ -30,25 +31,30 @@ const productos=[
   {nombre:'Lanco Dry-Coat – Penetrating Surface Cleaner (1 gal)', precio:null, categoria:'Limpieza', marca:'LANCO', foto:'assets/lanco-penetrating-surface-cleaner-dry-coat.jpg'},
   {nombre:'Amsoil Saber 2-Stroke Oil (mezcla)', precio:null, categoria:'Lubricantes', marca:'Amsoil', foto:'assets/2-stroke-oil.jpg'},
   {nombre:'Discos de corte StrongJohn (varios)', precio:null, categoria:'Abrasivos', marca:'StrongJohn', foto:'assets/discos-strongjohn.jpg'},
-  {nombre:'Fluidmaster Better Than Wax – Sello Universal para Inodoros', precio:null, categoria:'Plomería', marca:'Fluidmaster', foto:'assets/fluidmaster-better-than-wax.jpg'}
+  {nombre:'Fluidmaster Better Than Wax – Sello Universal para Inodoros', precio:null, categoria:'Plomería', marca:'Fluidmaster', foto:'assets/fluidmaster-better-than-wax.jpg'},
+  // NUEVO producto de catálogo
+  {nombre:'Abanicos con panel solar', precio:null, categoria:'Energía', marca:'AM-2501', foto:'assets/abanicos-con-panel-solar.jpg'}
 ];
 
+// Ofertas (reemplazado por la cisterna Fortlev)
 const ofertas=[
-  {nombre:'WECO W1000 Thin Set – Oferta especial', precio:14.99, categoria:'Ofertas', marca:'WECO', foto:'assets/oferta-weco.jpg'}
+  {nombre:'Cisterna Fortlev – 5 años de garantía', precio:159.00, categoria:'Ofertas', marca:'FORTLEV', foto:'assets/fortlev-5anos-de-garantia.jpg'}
 ];
 
-// Select de categorías
+// Cargar categorías dinámicamente
 const catSelect=document.getElementById('categoria');
 const categorias=[...new Set(productos.map(p=>p.categoria))].sort();
 categorias.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;catSelect.appendChild(o);});
 
+// Nodos
 const grid=document.getElementById('productGrid');
 const offersGrid=document.getElementById('offersGrid');
 const search=document.getElementById('search');
 
+// Ícono WA
 const waIcon = `<svg class="wa" viewBox="0 0 32 32" aria-hidden="true"><path d="M19.3 17.3c-.3-.2-1.6-.8-1.8-.9s-.4-.2-.6.1-.7.9-.9 1.1-.3.2-.6.1c-.3-.2-1.1-.4-2.1-1.3-1-.9-1.3-1.8-1.4-2.1 0-.2 0-.3.1-.4.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2.1-.2-.6-.4-.5-.6-.5h-.5c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.3 3.1 1.4 3.3c.2.2 2.6 4 6.4 5.4.9.4 1.7.6 2.3.8 1 .3 2 .2 2.7.1.8-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3z" fill="currentColor"/></svg>`;
 
-// Tarjeta de producto
+// Tarjeta de producto (catálogo → “Pedir cotización”)
 const productCardHTML=p=>`
   <article class="card">
     <img loading="lazy" src="${p.foto}" alt="${p.nombre}">
@@ -62,7 +68,7 @@ const productCardHTML=p=>`
     </div>
   </article>`;
 
-// Tarjeta de oferta (texto del CTA: “Pedir”)
+// Tarjeta de oferta (ofertas → “Pedir”)
 const offerCardHTML=o=>`
   <article class="card">
     <img loading="lazy" src="${o.foto}" alt="${o.nombre}">
@@ -76,6 +82,7 @@ const offerCardHTML=o=>`
     </div>
   </article>`;
 
+// Render & filtro
 function render(list){ grid.innerHTML=list.map(productCardHTML).join(''); }
 function filtrar(){
   const q=(search.value||'').toLowerCase().trim();
@@ -102,7 +109,7 @@ offersGrid.innerHTML=ofertas.map(offerCardHTML).join('');
   let i=0; setInterval(()=>{ i=(i+1)%frases.length; el.innerHTML=frases[i]; }, 2500);
 })();
 
-// Carrusel: puntos con ventana (máx 5) — sirve para productos, ofertas y reseñas
+// Carrusel: puntos con ventana (máx 5)
 (function(){
   const MAX_DOTS = 5;
 
