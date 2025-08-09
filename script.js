@@ -59,7 +59,7 @@ const ofertas=[
   const offersGrid = $('offersGrid');
   const search = $('search');
 
-  // Pinta categorías si existe el <select>
+  // Cargar categorías
   if (catSelect) {
     const categorias=[...new Set(productos.map(p=>p.categoria))].sort();
     categorias.forEach(c=>{
@@ -112,15 +112,11 @@ const ofertas=[
     render(list);
   }
 
-  // Listeners seguros
   if (search) search.addEventListener('input',filtrar);
   if (catSelect) catSelect.addEventListener('change',filtrar);
 
-  // Primer render
-  render(productos);
-
-  // Ofertas
-  if (offersGrid) offersGrid.innerHTML = ofertas.map(offerCardHTML).join('');
+  render(productos); // catálogo
+  if (offersGrid) offersGrid.innerHTML = ofertas.map(offerCardHTML).join(''); // ofertas (2)
 })();
 
 // ===== Hero ticker =====
@@ -199,18 +195,15 @@ const ofertas=[
 
     const RO = window.ResizeObserver || class{ constructor(cb){ this.cb=cb; window.addEventListener('resize', ()=>cb()); } observe(){} };
     const ro = new RO(renderDots);
-    // Observa todos los scrollers que tienen dots
-    document.querySelectorAll('.carousel-dots').forEach(dots=>{
-      const id = dots.getAttribute('data-for');
-      const scroller = $(id);
-      if(!scroller) return;
-      ro.observe(scroller);
-      scroller.addEventListener('scroll', onScroll, { passive:true });
-      renderDots();
-    });
+    ro.observe(scrollEl);
+
+    scrollEl.addEventListener('scroll', onScroll, { passive:true });
+    renderDots();
   }
 
-  // init al cargar
-  setupDots; // no-op para evitar tree-shaking accidental
-  // Lanzamos setup sobre cada par (se hace dentro de renderDots arriba)
+  document.querySelectorAll('.carousel-dots').forEach(dots=>{
+    const id = dots.getAttribute('data-for');
+    const scroller = document.getElementById(id);
+    setupDots(scroller, dots);
+  });
 })();
