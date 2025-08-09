@@ -34,7 +34,6 @@ const productos=[
 ];
 
 const ofertas=[
-  // Demo con precio para que se vea la etiqueta de precio
   {nombre:'WECO W1000 Thin Set – Oferta especial', precio:14.99, categoria:'Ofertas', marca:'WECO', foto:'assets/oferta-weco.jpg'}
 ];
 
@@ -49,7 +48,7 @@ const search=document.getElementById('search');
 
 const waIcon = `<svg class="wa" viewBox="0 0 32 32" aria-hidden="true"><path d="M19.3 17.3c-.3-.2-1.6-.8-1.8-.9s-.4-.2-.6.1-.7.9-.9 1.1-.3.2-.6.1c-.3-.2-1.1-.4-2.1-1.3-1-.9-1.3-1.8-1.4-2.1 0-.2 0-.3.1-.4.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.6-1.5-.8-2.1-.2-.6-.4-.5-.6-.5h-.5c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.3 3.1 1.4 3.3c.2.2 2.6 4 6.4 5.4.9.4 1.7.6 2.3.8 1 .3 2 .2 2.7.1.8-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3z" fill="currentColor"/></svg>`;
 
-// Tarjeta de producto (sin precio: CTA "Pedir cotización")
+// Tarjeta de producto
 const productCardHTML=p=>`
   <article class="card">
     <img loading="lazy" src="${p.foto}" alt="${p.nombre}">
@@ -63,7 +62,7 @@ const productCardHTML=p=>`
     </div>
   </article>`;
 
-// Tarjeta de oferta (con posible precio: CTA "Pedir")
+// Tarjeta de oferta (texto del CTA: “Pedir”)
 const offerCardHTML=o=>`
   <article class="card">
     <img loading="lazy" src="${o.foto}" alt="${o.nombre}">
@@ -77,7 +76,6 @@ const offerCardHTML=o=>`
     </div>
   </article>`;
 
-// Render & filtro
 function render(list){ grid.innerHTML=list.map(productCardHTML).join(''); }
 function filtrar(){
   const q=(search.value||'').toLowerCase().trim();
@@ -104,7 +102,7 @@ offersGrid.innerHTML=ofertas.map(offerCardHTML).join('');
   let i=0; setInterval(()=>{ i=(i+1)%frases.length; el.innerHTML=frases[i]; }, 2500);
 })();
 
-// Carrusel: puntos con ventana (máx 5)
+// Carrusel: puntos con ventana (máx 5) — sirve para productos, ofertas y reseñas
 (function(){
   const MAX_DOTS = 5;
 
