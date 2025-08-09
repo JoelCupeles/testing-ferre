@@ -1,4 +1,4 @@
-// Altura real del header
+// Altura real del header -> evita huecos bajo navbar
 const headerEl = document.getElementById('siteHeader');
 function setHeaderHeight(){
   const h = headerEl.offsetHeight || 64;
@@ -22,7 +22,7 @@ Array.from(document.querySelectorAll('nav a')).forEach(a=>a.addEventListener('cl
 // Año en footer
 const yEl=document.getElementById('y'); if(yEl) yEl.textContent=new Date().getFullYear();
 
-// Productos demo
+// Productos (demo)
 const productos=[
   {nombre:'Taladro DeWalt 20V MAX (driver)', precio:null, categoria:'Herramientas', marca:'DeWalt', foto:'assets/Dewalt-driver.webp?v=1'},
   {nombre:'Gardner 100% Silicón – Flat Roof Coat-N-Seal (4.75 gal)', precio:null, categoria:'Construcción', marca:'Gardner', foto:'assets/gardner-100-silicone.jpg'},
@@ -83,7 +83,7 @@ offersGrid.innerHTML=ofertas.map(cardHTML).join('');
   let i=0; setInterval(()=>{ i=(i+1)%frases.length; el.innerHTML=frases[i]; }, 2500);
 })();
 
-// Carrusel con puntos ventana
+// Carrusel: puntos con ventana (máx 5)
 (function(){
   const MAX_DOTS = 5;
 
@@ -167,6 +167,7 @@ offersGrid.innerHTML=ofertas.map(cardHTML).join('');
     setupDots(scroller, dots);
   });
 })();
+
 
 
 
