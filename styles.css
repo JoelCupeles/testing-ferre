@@ -44,7 +44,12 @@ nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;col
   content:"";position:absolute;inset:0;z-index:0;
   background:
     radial-gradient(60% 52% at 50% 40%, rgba(0,0,0,.10), transparent 62%),
-    linear-gradient(180deg, rgba(0,0,0,.50), rgba(0,0,0,.28) 40%, rgba(0,0,0,.66));
+    linear-gradient(180deg, rgba(0,0,0,.50), rgba(0,0,0,.28) 40%, rgba(0,0,0,.70));
+}
+/* Fade suave hacia el fondo de la página */
+.hero::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:110px;z-index:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--bg) 88%);
 }
 .hero .wrap{
   position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;
@@ -87,7 +92,14 @@ nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;col
 .pill{display:inline-block;background:#0f1114;color:#fff;padding:3px 8px;border-radius:999px;font-size:12px;border:1px solid var(--borde)}
 .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
 
-/* ====== NUEVO: BOTÓN ROJO WHATSAPP EN TARJETAS ====== */
+/* Precio (visible cuando exista) */
+.price{
+  margin-top:8px;font-weight:900;font-size:18px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+  padding:8px 10px;border-radius:10px;display:inline-block;
+}
+
+/* Botón rojo WhatsApp en tarjetas */
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;font-weight:900;border:0;cursor:pointer}
 .btn-full{width:100%}
 .btn-wa-red{
@@ -102,16 +114,6 @@ nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;col
 .btn-wa-red:active{transform:translateY(1px); box-shadow:0 6px 14px rgba(225,6,0,.22), inset 0 1px 0 rgba(255,255,255,.1)}
 
 .card .btn{margin-top:10px}
-
-/* Reseñas */
-.reviews{display:grid;grid-template-columns:1fr;gap:14px}
-@media (min-width:900px){.reviews{grid-template-columns:repeat(3,1fr)}}
-.review-card{background:var(--card);border:1px solid var(--borde);border-radius:14px;padding:16px;min-height:160px;display:flex;flex-direction:column;gap:8px}
-.review-head{display:flex;align-items:center;gap:10px}
-.avatar{width:40px;height:40px;border-radius:50%;background:#202227;display:grid;place-items:center;font-weight:800}
-.stars{color:#f5c518;letter-spacing:1px}
-.rating-badge{display:inline-flex;align-items:center;gap:6px;background:#111214;border:1px solid var(--borde);border-radius:999px;padding:6px 10px;font-weight:800}
-.btn-ghost{display:inline-block;border:1px solid var(--borde);padding:10px 12px;border-radius:12px}
 
 /* Servicios */
 .service-list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
@@ -128,6 +130,13 @@ nav a{padding:8px 12px;border-radius:12px;font-weight:800;white-space:nowrap;col
 .service-body h3{margin:2px 0 6px;font-size:18px;line-height:1.2}
 .service-body p{margin:0;color:var(--muted);font-size:15px}
 .btn-compact{padding:9px 12px;border-radius:10px;margin-top:10px;display:inline-flex}
+
+/* CTA verde (máquina de presión) */
+.btn-cta-green{
+  background:linear-gradient(135deg,var(--verde),var(--verde2));
+  color:#0a0b0c;font-weight:900;border-radius:12px;
+  box-shadow:0 8px 20px rgba(32,223,120,.25);
+}
 
 /* Mapa / Contacto */
 .map{border:0;width:100%;height:360px;border-radius:14px}
@@ -152,8 +161,8 @@ footer a{color:#ffdede}
 
   .hero{background-position:center 66%}
   .hero .wrap{grid-template-columns:1fr;padding:4px 0 10px}
-  /* baja un poco los datos para no tapar la fachada */
-  .hero-facts{grid-template-columns:repeat(2, minmax(0,1fr));margin-top:clamp(18px,16vh,120px)}
+  /* BAJAR MÁS los datos para no tapar la fachada */
+  .hero-facts{grid-template-columns:repeat(2, minmax(0,1fr));margin-top:clamp(26px,22vh,180px)}
   .chip b{font-size:15px}
 
   .foot{grid-template-columns:1fr}
